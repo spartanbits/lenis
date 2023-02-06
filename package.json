@@ -1,10 +1,10 @@
 {
-  "version": "0.1.15",
+  "version": "0.1.16",
   "license": "MIT",
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
   "type": "module",
   "exports": {
-    ".": "./dist/index.cjs",
+    ".": "./dist/index.js",
     "./package.json": "./package.json"
   },
   "typings": "dist/index.d.ts",
@@ -41,14 +41,14 @@
   "name": "@spartanbits/lenis",
   "author": "Spartanbits S.L.U.",
   "repository": "https://github.com/spartanbits/lenis.git",
-  "module": "dist/spartanbits-lenis.esm.js",
+  "module": "dist/lenis.esm.js",
   "size-limit": [
     {
-      "path": "dist/spartanbits-lenis.cjs.production.min.js",
+      "path": "dist/lenis.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/spartanbits-lenis.esm.js",
+      "path": "dist/lenis.esm.js",
       "limit": "10 KB"
     }
   ],
