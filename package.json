@@ -1,5 +1,5 @@
 {
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "main": "dist/index.js",
   "type": "module",
@@ -37,14 +37,14 @@
   "name": "@spartanbits/lenis",
   "author": "Spartanbits S.L.U.",
   "repository": "https://github.com/spartanbits/lenis.git",
-  "module": "dist/spartanbits-lenis.esm.js",
+  "module": "dist/spartanbits-lenis.esm.mjs",
   "size-limit": [
     {
       "path": "dist/spartanbits-lenis.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/spartanbits-lenis.esm.js",
+      "path": "dist/spartanbits-lenis.esm.mjs",
       "limit": "10 KB"
     }
   ],
