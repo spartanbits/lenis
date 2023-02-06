@@ -1,0 +1,63 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "pubpatch": "npm version patch --force && npm publish",
+    "pubminor": "npm version minor --force && npm publish",
+    "pubmajor": "npm version major --force && npm publish"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "@spartanbits/lenis",
+  "author": "Spartanbits S.L.U.",
+  "repository": "https://github.com/spartanbits/lenis.git",
+  "module": "dist/spartanbits-lenis.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/spartanbits-lenis.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/spartanbits-lenis.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^8.1.2",
+    "husky": "^8.0.3",
+    "size-limit": "^8.1.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "nanoevents": "^7.0.1",
+    "tiny-emitter": "^2.1.0",
+    "virtual-scroll": "^2.2.1"
+  }
+}
