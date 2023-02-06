@@ -1,11 +1,7 @@
 {
-  "version": "0.1.10",
+  "version": "0.1.11",
   "license": "MIT",
   "main": "dist/index.js",
-  "type": "module",
-  "exports": {
-    "import": "./index.js"
-  },
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
