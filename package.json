@@ -1,10 +1,10 @@
 {
-  "version": "0.1.14",
+  "version": "0.1.15",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "type": "module",
   "exports": {
-    ".": "./dist/index.js",
+    ".": "./dist/index.cjs",
     "./package.json": "./package.json"
   },
   "typings": "dist/index.d.ts",
