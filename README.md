@@ -18,6 +18,6 @@ Event callbacks receive a precomputed ScrollState object to avoid using get func
 
 ### Adding event listeners
 
-| Method    | Callback Arguments                                                                                                                                   |
-|----------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `addScrollStateListener` | `scroll`: scroll position in px. <br>`progress`: scroll progress respect page limit (0-1). <br>`limit`: scroll limit in px. <br>`velocity`: scroll velocity.
+| Method                   | Callback Arguments | Returns
+|--------------------------|--------------------|--------
+| `addScrollStateListener` | `scroll`: scroll position in px.<br>`progress`: scroll progress respect page limit (0-1).<br>`limit`: scroll limit in px. <br>`velocity`: scroll velocity. | `UnsubscribeListener`callback
