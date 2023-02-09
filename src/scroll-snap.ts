@@ -34,7 +34,7 @@ export class ScrollSnap {
     this.lenis = lenis
     this.init()
 
-    lenis.on('scroll', this.onScroll)
+    lenis.addScrollStateListener(this.onScroll)
   }
 
   private init() {

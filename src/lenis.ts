@@ -68,6 +68,15 @@ type LenisOptions = {
   normalizeWheel?: boolean
 }
 
+export type ScrollState = {
+  scroll: number
+  progress: number
+  velocity: number
+  limit: number
+}
+
+export type ScrollStateCallback = (state: ScrollState) => void
+
 class Lenis {
   // isScrolling = true when scroll is animating
   // isStopped = true if user should not be able to scroll - enable/disable programatically
@@ -85,6 +94,7 @@ class Lenis {
   private virtualScroll: VirtualScroll
   private isLocked: boolean
   private time: number
+  private scrollState: ScrollState
   private __isSmooth: boolean
   private __isScrolling: boolean
   private __isStopped: boolean
@@ -127,7 +137,7 @@ class Lenis {
 
     this.wrapper = new ObservedElement(wrapper)
     this.content = new ObservedElement(content)
-    ;(this.rootElement as HTMLElement).classList.add('lenis')
+    this.rootElement.classList.add('lenis')
 
     this.isStopped = false
     this.isSmooth = smoothWheel || smoothTouch
@@ -138,6 +148,12 @@ class Lenis {
     this.isLocked = false
     this.time = 0
     this.velocity = 0
+    this.scrollState = {
+      scroll: 0,
+      progress: 0,
+      limit: 0,
+      velocity: 0,
+    }
     this.__isScrolling = false
     this.__isSmooth = this.isSmooth
     this.__isStopped = false
@@ -164,11 +180,19 @@ class Lenis {
     this.virtualScroll.destroy()
   }
 
-  public on(event: string, callback: (...args: any) => void) {
+  public addScrollStateListener = (callback: ScrollStateCallback) => {
+    return this.on('scroll', callback)
+  }
+
+  public removeScrollStateListener = (callback: ScrollStateCallback) => {
+    this.off('scroll', callback)
+  }
+
+  private on(event: string, callback: (...args: any) => void) {
     return this.emitter.on(event, callback)
   }
 
-  public off(event: string, callback: (...args: any) => void) {
+  private off(event: string, callback: (...args: any) => void) {
     this.emitter.events[event] = this.emitter.events[event]?.filter(
       i => callback !== i
     )
@@ -234,13 +258,23 @@ class Lenis {
     this.scrollTo(this.targetScroll + delta, { programmatic: false })
   }
 
-  emit() {
-    this.emitter.emit('scroll', {
-      progress: this.progress,
-      velocity: this.velocity,
-      scroll: this.scroll,
-      limit: this.limit,
-    })
+  emit = () => {
+    this.updateScrollState()
+    this.emitter.emit('scroll', this.scrollState)
+  }
+
+  private updateScrollState = () => {
+    this.scrollState.progress = this.progress
+    this.scrollState.velocity = this.velocity
+    this.scrollState.scroll = this.scroll
+    this.scrollState.limit = this.limit
+  }
+
+  private resetScrollState = () => {
+    this.scrollState.progress = 0
+    this.scrollState.velocity = 0
+    this.scrollState.scroll = 0
+    this.scrollState.limit = 0
   }
 
   onScroll = () => {
@@ -251,33 +285,34 @@ class Lenis {
     }
   }
 
-  reset() {
+  reset = () => {
     this.isLocked = false
     this.isScrolling = false
     this.velocity = 0
+    this.resetScrollState()
   }
 
-  start() {
+  start = () => {
     this.isStopped = false
 
     this.reset()
   }
 
-  stop() {
+  stop = () => {
     this.isStopped = true
     this.animate.stop()
 
     this.reset()
   }
 
-  raf(time: number) {
+  raf = (time: number) => {
     const deltaTime = time - (this.time || time)
     this.time = time
 
     this.animate.advance(deltaTime * 0.001)
   }
 
-  scrollTo(
+  scrollTo = (
     target: number | string | HTMLElement,
     {
       offset = 0,
@@ -290,7 +325,7 @@ class Lenis {
       force = false, // scroll even if stopped
       programmatic = true, // called from outside of the class
     }: ScrollToOptions = {}
-  ) {
+  ) => {
     if (this.isStopped && !force) return
 
     // keywords
