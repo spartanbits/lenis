@@ -14,7 +14,7 @@ Removed generic `lenis.on('scroll', callback)` API in favor of specific function
 `addScrollStateListener(callback: ScrollStateCallback)`<br>
 `removeScrollStateListener(callback: ScrollStateCallback)`
 
-Event callbacks receive a precomputed ScrollState object to avoid using get functions and remove computing overhead:
+Event callbacks receive a precomputed `ScrollState` object to avoid using get functions and remove computing overhead:
 
 ### Adding event listeners
 
