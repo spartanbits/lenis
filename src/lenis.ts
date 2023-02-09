@@ -75,6 +75,8 @@ export type ScrollState = {
   limit: number
 }
 
+export type UnsubscribeListener = () => void
+
 export type ScrollStateCallback = (state: ScrollState) => void
 
 class Lenis {
@@ -180,7 +182,9 @@ class Lenis {
     this.virtualScroll.destroy()
   }
 
-  public addScrollStateListener = (callback: ScrollStateCallback) => {
+  public addScrollStateListener = (
+    callback: ScrollStateCallback
+  ): UnsubscribeListener => {
     return this.on('scroll', callback)
   }
 
