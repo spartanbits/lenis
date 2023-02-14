@@ -343,7 +343,7 @@ class Lenis {
       ['bottom', 'right', 'end'].includes(target)
     ) {
       target = this.limit
-    } else {
+    } else if (typeof target !== 'number') {
       let node: HTMLElement | null = null
 
       if (typeof target === 'string') {
