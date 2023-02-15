@@ -3,6 +3,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "type": "module",
   "module": "dist/lenis.esm.js",
   "exports": {
     "require": "./dist/index.js",
