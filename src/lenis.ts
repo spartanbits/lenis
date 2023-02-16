@@ -28,7 +28,7 @@ import { createNanoEvents, Emitter } from 'nanoevents'
 import { Animate, EasingFunction } from './animate'
 import { clamp, clampedModulo } from './maths'
 import { ObservedElement } from './observed-element'
-import { ScrollEvent, VirtualScroll } from './virtual-scroll.js'
+import { ScrollEvent, VirtualScroll } from './virtual-scroll'
 
 // Technical explaination
 // - listen to 'wheel' events
@@ -371,8 +371,7 @@ class Lenis {
 
     if (typeof target !== 'number') return
 
-    target += offset
-    target = Math.round(target)
+    target = Math.round(target + offset)
 
     if (this.options.infinite) {
       if (programmatic) {
